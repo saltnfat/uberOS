@@ -97,6 +97,7 @@ in
       clamtk
       element-desktop
       cryfs
+      cobang # qr scanner from webcam
 
       # fonts
       cherry

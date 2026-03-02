@@ -1,18 +1,30 @@
-{ pkgs, config, username, host, ... }:
+{
+  pkgs,
+  config,
+  username,
+  host,
+  ...
+}:
 
 let
   inherit (import ./../hosts/${host}/options.nix) gitUsername theShell;
-in {
+in
+{
   users.users = {
     "${username}" = {
       homeMode = "755";
       hashedPassword = "$6$edpk.us5k8TGExLh$f3Q6AhZtLGXcOOOmnyUE7CSOMAmB0219Vgw1gbQkXE49M53XRYP7eRbiH9p84nsYjwBHsmrJVUB0Tm1YeS4AS.";
       isNormalUser = true;
       description = "${gitUsername}";
-      extraGroups = [ "networkmanager" "wheel" "libvirtd" ];
+      extraGroups = [
+        "networkmanager"
+        "wheel"
+        "libvirtd"
+        "video"
+      ];
       shell = pkgs.${theShell};
       ignoreShellProgramCheck = true;
-      packages = with pkgs; [];
+      packages = with pkgs; [ ];
     };
     # "newuser" = {
     #   homeMode = "755";
