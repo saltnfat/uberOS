@@ -30,14 +30,17 @@ in
         signByDefault = true;
         format = "openpgp";
       };
+      log = {
+        decorate = "full"; # Show branch/tag info in git log
+        date = "iso"; # ISO 8601 date format
+        showSignature = true;
+      };
       commit.gpgsign = true;
       tag.gpgSign = true;
 
       # FOSS-friendly settings
       push.default = "simple"; # Match modern push behavior
       credential.helper = "cache --timeout=7200";
-      log.decorate = "full"; # Show branch/tag info in git log
-      log.date = "iso"; # ISO 8601 date format
       # Conflict resolution style for readable diffs
       merge.conflictStyle = "diff3";
 
