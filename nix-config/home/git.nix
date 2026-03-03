@@ -5,7 +5,12 @@
   ...
 }:
 let
-  inherit (import ../hosts/${host}/options.nix) gitUsername gitEmail;
+  inherit (import ../hosts/${host}/options.nix)
+    gitUsername
+    gitEmail
+    username
+    gpgSigningKeyId
+    ;
 in
 {
   programs.git = {
@@ -15,11 +20,18 @@ in
       user = {
         name = "${gitUsername}";
         email = "${gitEmail}";
+        signingKey = "${gpgSigningKeyId}";
       };
       core = {
         editor = "nvim";
         pager = "delta";
       };
+      signing = {
+        signByDefault = true;
+        format = "openpgp";
+      };
+      commit.gpgsign = true;
+      tag.gpgSign = true;
 
       # FOSS-friendly settings
       push.default = "simple"; # Match modern push behavior

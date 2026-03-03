@@ -16,6 +16,7 @@ in
   # User Variables
   gitUsername = "jwy";
   gitEmail = "jwingy@gmail.com";
+  gpgSigningKeyId = "67941A938C501A7D";
 
   # System Settings
   theLocale = "en_US.UTF-8";

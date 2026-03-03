@@ -13,6 +13,7 @@
   imports = [
     ./nix-config/home
     inputs.dms.homeModules.dank-material-shell
+    inputs.sops-nix.homeManagerModules.sops
   ];
 
   programs.home-manager.enable = true;

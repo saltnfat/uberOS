@@ -35,9 +35,11 @@ in
     ./qt.nix
     ./rofi
     ./scripts
+    ./sops.nix
     ./starship.nix
     ./stylix.nix
     ./swaync.nix
+    ./syncthing.nix
     ./tmux.nix
     ./virtmanager.nix
     ./wlogout
