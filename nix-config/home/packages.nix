@@ -98,6 +98,7 @@ in
       element-desktop
       cryfs
       cobang # qr scanner from webcam
+      motrix # download manager
 
       # fonts
       cherry

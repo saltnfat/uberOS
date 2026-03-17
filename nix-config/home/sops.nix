@@ -5,6 +5,7 @@ in
 {
 
   sops.defaultSopsFile = ./../../secrets/secrets.yaml;
+  #sops.defaultSopsFile = ./../../${hostname}/secrets/secrets.yaml;
   sops.age.sshKeyPaths = [ "/home/${username}/.ssh/id_ed25519" ];
   sops.secrets."syncthing/${hostname}/cert.pem" = { };
   sops.secrets."syncthing/${hostname}/key.pem" = { };

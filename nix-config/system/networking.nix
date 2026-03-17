@@ -25,6 +25,7 @@ in
         8384
         22000
         3000
+        465 # gmail smtp
       ];
       allowedUDPPorts = [
         22000
