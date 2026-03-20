@@ -44,11 +44,11 @@ The installer only works for **NixOS** Linux
 <b>Open a terminal in HOME</b>
 - **Clone this repo**
 ```sh
-git clone https://github.com/jwyuen/jwy-gh0stzk-dotfiles.git
+git clone https://github.com/saltnfat/uberOS.git
 ```
 - **cd into repo**
 ```sh
-cd jwy-gh0stzk-dotfiles
+cd uberOS
 ```
 - **Give install script execute permissions**
 ```sh

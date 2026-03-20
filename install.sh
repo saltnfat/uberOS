@@ -3,7 +3,7 @@
 
 source install-lib.sh
 
-PROJECT_NAME="jwy-gh0stzk-dotfiles"
+PROJECT_NAME="uberOS"
 REPO_NAME=$PROJECT_NAME
 current_user_name=$USER
 user_name=$current_user_name
@@ -75,8 +75,8 @@ echo "-----"
 # If creating a new host
 
 if [ "$use_new_host" == true ]; then
-  mkdir -p ./nix-config/hosts/"$host_name"
-  cp ./nix-config/hosts/nix-vm/options.nix ./nix-config/hosts/"$host_name"/
+  mkdir -p ./hosts/"$host_name"
+  cp ./hosts/nix-vm/variables.nix ./hosts/"$host_name"/
 
   read -rp "Enter Your Username: [ $current_user_name ] " user_name_response
   if [ ! -z "$user_name_response" ]; then
@@ -94,7 +94,7 @@ if [ "$use_new_host" == true ]; then
         echo "Passwords Match. Setting password."
         user_password=$(mkpasswd -m sha-512 "$new_pass")
         escaped_user_password=$(echo "$user_password" | sed 's/\//\\\//g')
-        sed -i "/^\s*hashedPassword[[:space:]]*=[[:space:]]*\"/s#\"\(.*\)\"#\"$escaped_user_password\"#" ./nix-config/users/users.nix
+        sed -i "/^\s*hashedPassword[[:space:]]*=[[:space:]]*\"/s#\"\(.*\)\"#\"$escaped_user_password\"#" ./modules/core/user.nix
         break
       fi
     done
@@ -102,10 +102,10 @@ if [ "$use_new_host" == true ]; then
     exit
   fi
 
-  sed -i "/^\s*setHostname[[:space:]]*=[[:space:]]*\"/s/\"\(.*\)\"/\"$host_name\"/" ./nix-config/hosts/"$host_name"/options.nix
-  sed -i "/^\s*setUsername[[:space:]]*=[[:space:]]*\"/s/\"\(.*\)\"/\"$user_name\"/" ./nix-config/hosts/"$host_name"/options.nix
-  sudo nixos-generate-config --show-hardware-config >./nix-config/hosts/"$host_name"/hardware.nix
-  git add ./nix-config/hosts/"$host_name"/
+  sed -i "/^\s*hostname[[:space:]]*=[[:space:]]*\"/s/\"\(.*\)\"/\"$host_name\"/" ./hosts/"$host_name"/variables.nix
+  sed -i "/^\s*username[[:space:]]*=[[:space:]]*\"/s/\"\(.*\)\"/\"$user_name\"/" ./hosts/"$host_name"/variables.nix
+  sudo nixos-generate-config --show-hardware-config >./hosts/"$host_name"/hardware.nix
+  git add ./hosts/"$host_name"/
 
 fi
 
@@ -119,7 +119,7 @@ if [[ $REPLY =~ ^[Nn]$ ]]; then
   read -p "Do you want to generate a hardware config? (First time install typically)" -n 1 -r
   if [[ $REPLY =~ ^[Yy]$ ]]; then
     echo ""
-    sudo nixos-generate-config --show-hardware-config >./nix-config/hosts/"$host_name"/hardware.nix
+    sudo nixos-generate-config --show-hardware-config >./hosts/"$host_name"/hardware.nix
   fi
   echo ""
 
@@ -140,13 +140,13 @@ if [[ $REPLY =~ ^[Nn]$ ]]; then
         echo "Passwords Match. Setting password."
         user_password=$(mkpasswd -m sha-512 "$new_pass")
         escaped_user_password=$(echo "$user_password" | sed 's/\//\\\//g')
-        sed -i "/^\s*hashedPassword[[:space:]]*=[[:space:]]*\"/s#\"\(.*\)\"#\"$escaped_user_password\"#" ./nix-config/users/users.nix
+        sed -i "/^\s*hashedPassword[[:space:]]*=[[:space:]]*\"/s#\"\(.*\)\"#\"$escaped_user_password\"#" ./modules/core/user.nix
         break
       fi
     done
 
-    sed -i "/^\s*setUsername[[:space:]]*=[[:space:]]*\"/s/\"\(.*\)\"/\"$user_name\"/" ./nix-config/hosts/"$host_name"/options.nix
-    sed -i "/^\s*setHostname[[:space:]]*=[[:space:]]*\"/s/\"\(.*\)\"/\"$host_name\"/" ./nix-config/hosts/"$host_name"/options.nix
+    sed -i "/^\s*username[[:space:]]*=[[:space:]]*\"/s/\"\(.*\)\"/\"$user_name\"/" ./hosts/"$host_name"/variables.nix
+    sed -i "/^\s*hostname[[:space:]]*=[[:space:]]*\"/s/\"\(.*\)\"/\"$host_name\"/" ./hosts/"$host_name"/variables.nix
 
   fi
 

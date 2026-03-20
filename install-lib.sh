@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PROJECT_DIR=~/jwy-gh0stzk-dotfiles
+PROJECT_DIR=~/uberOS
 XDG_CONFIG_HOME=~/.config
 LOCAL_DIR=~/.local
 

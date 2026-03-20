@@ -4,8 +4,10 @@
   inputs = {
     utils.url = "github:numtide/flake-utils";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    home-manager.url = "github:nix-community/home-manager";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    home-manager = {
+      url = "github:nix-community/home-manager/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     stylix = {
       url = "github:nix-community/stylix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -50,45 +52,44 @@
       ...
     }:
     let
-      system = "x86_64-linux";
-      host = "nix-vm";
-      inherit (import ./nix-config/hosts/${host}/options.nix) username hostname;
-      pkgs = import nixpkgs {
-        inherit system;
-        config = {
-          allowUnfree = true;
-        };
-      };
-    in
-    {
-      nixosConfigurations = {
-        # default config
-        "${hostname}" = nixpkgs.lib.nixosSystem {
+      username = "non";
+      hosts = [
+        "nix-deskstar"
+        "vm"
+        "nix-lappy"
+      ];
+      supportedSystems = [
+        "x86_64-linux"
+        "aarch64-linux"
+      ];
+      forAllSystems = nixpkgs.lib.genAttrs supportedSystems;
+
+      # Deduplicate nixosConfigurations while preserving the top-level 'profile'
+      mkNixosConfig =
+        host:
+        nixpkgs.lib.nixosSystem {
           specialArgs = {
-            inherit system;
             inherit inputs;
             inherit username;
-            inherit hostname;
-            inherit host;
           };
           modules = [
-            ./system.nix
+            ./modules/core
+            ./modules/drivers
+            ./hosts/${host}
+            ./profiles
             lanzaboote.nixosModules.lanzaboote
             sops-nix.nixosModules.sops
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.extraSpecialArgs = {
-                inherit username;
-                inherit inputs;
-                inherit host;
-              };
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.backupFileExtension = "backup";
-              home-manager.users.${username} = import ./home.nix;
-            }
           ];
         };
-      };
+
+    in
+    {
+      nixosConfigurations = builtins.listToAttrs (
+        map (host: {
+          name = host;
+          value = mkNixosConfig host;
+        }) hosts
+      );
+      #formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
     };
 }

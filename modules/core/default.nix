@@ -1,0 +1,35 @@
+{
+  inputs,
+  host,
+  config,
+  ...
+}:
+{
+
+  imports = [
+    ../options.nix
+    ./boot.nix
+    ./dev-mode.nix
+    ./fonts.nix
+    ./hwclock.nix
+    ./kde.nix
+    ./lact.nix
+    ./logitech.nix
+    ./ly.nix
+    ./maccel.nix
+    ./networking.nix
+    ./opengl.nix
+    ./packages.nix
+    ./printing.nix
+    ./quickshell.nix
+    ./sddm.nix
+    ./security.nix
+    ./services.nix
+    ./stylix.nix
+    ./system.nix
+    ./thunar.nix
+    ./user.nix
+    ./virtualisation.nix
+    inputs.stylix.nixosModules.stylix
+  ];
+}
