@@ -1,9 +1,9 @@
 #!/usr/bin/env nix-shell
-#! nix-shell -i bash -p stow git
+#! nix-shell -i bash -p stow git pciutils
 
 source install-lib.sh
 
-PROJECT_NAME="uberOS"
+PROJECT_NAME="UberOS"
 REPO_NAME=$PROJECT_NAME
 current_user_name=$USER
 user_name=$current_user_name
@@ -24,6 +24,12 @@ echo "-----"
 ###############################################################################
 
 # Prompt user for type of host environment
+printHeader "Host Selection for $PROJECT_NAME (NixOS) Installation"
+
+echo "Default options are in brackets []"
+echo "Just press enter to select the default"
+
+echo "-----"
 
 option_one="nix-deskstar (desktop)"
 option_two="nix-lappy (laptop)"
@@ -49,12 +55,12 @@ select opt in "${options[@]}"; do
     break
     ;;
   "$option_four")
-    read -rp "Enter Host Name:" new_host
+    read -rp "Enter Host Name: " new_host
     host_name=$new_host
     break
     ;;
   "$option_five")
-    read -rp "Enter New Host Name:" new_host
+    read -rp "Enter New Host Name: " new_host
     host_name=$new_host
     use_new_host=true
     break
@@ -67,111 +73,67 @@ select opt in "${options[@]}"; do
   esac
 done
 
-echo "Host is set to $host_name"
+echo -e "${GREEN}Host is set to: $host_name${NC}"
 
 echo "-----"
 
 ###############################################################################
 # If creating a new host
 
+printHeader "Creating a New Host"
+
 if [ "$use_new_host" == true ]; then
-  mkdir -p ./hosts/"$host_name"
-  cp ./hosts/nix-vm/variables.nix ./hosts/"$host_name"/
 
   read -rp "Enter Your Username: [ $current_user_name ] " user_name_response
   if [ ! -z "$user_name_response" ]; then
     user_name=$user_name_response
   fi
 
-  if [ "$current_user_name" != "$user_name" ]; then
-    echo "This will create a hashedPassword for the new user in the options file."
-    while true; do
-      echo
-      read -rp "Enter New User Password: " new_pass
-      echo
-      read -rp "Enter New User Password Again: " new_pass2
-      if [ "$new_pass" == "$new_pass2" ]; then
-        echo "Passwords Match. Setting password."
-        user_password=$(mkpasswd -m sha-512 "$new_pass")
-        escaped_user_password=$(echo "$user_password" | sed 's/\//\\\//g')
-        sed -i "/^\s*hashedPassword[[:space:]]*=[[:space:]]*\"/s#\"\(.*\)\"#\"$escaped_user_password\"#" ./modules/core/user.nix
-        break
-      fi
-    done
-
-    exit
-  fi
-
-  sed -i "/^\s*hostname[[:space:]]*=[[:space:]]*\"/s/\"\(.*\)\"/\"$host_name\"/" ./hosts/"$host_name"/variables.nix
-  sed -i "/^\s*username[[:space:]]*=[[:space:]]*\"/s/\"\(.*\)\"/\"$user_name\"/" ./hosts/"$host_name"/variables.nix
-  sudo nixos-generate-config --show-hardware-config >./hosts/"$host_name"/hardware.nix
-  git add ./hosts/"$host_name"/
+  createNewHost "$host_name" "$user_name"
 
 fi
 
 ###############################################################################
-# Ask if user wants to do an express install
+# Express install
 
-read -p "Do you want to do an express install [use defaults]? For a new host do not use express install!" -n 1 -r
-echo ""
-if [[ $REPLY =~ ^[Nn]$ ]]; then
+express_install=false
+if [ "$use_new_host" == false ]; then
+  read -p "Do you want to do an express install [use defaults]?" -n 1 -r
+  echo ""
+  if [[ $REPLY =~ ^[Yy]$ ]] || [ -z "$REPLY" ]; then
+    echo "express install chosen"
+    express_install=true
+  fi
 
-  read -p "Do you want to generate a hardware config? (First time install typically)" -n 1 -r
+  # if [ -z "$REPLY" ]; then
+  #   express_install=true
+  # fi
+fi
+
+if [ "$express_install" == false ] && [ "$use_new_host" == false ]; then
+
+  read -p "Do you want to generate a new hardware config for the host $host_name?" -n 1 -r
   if [[ $REPLY =~ ^[Yy]$ ]]; then
     echo ""
-    sudo nixos-generate-config --show-hardware-config >./hosts/"$host_name"/hardware.nix
+    generateHardwareConfig "$host_name"
   fi
   echo ""
 
-  read -rp "Enter Your Username: [ $current_user_name ] " user_name_response
-  if [ ! -z "$user_name_response" ]; then
-    user_name=$user_name_response
+  read -p "Do you want to change the user for the host $host_name?" -n 1 -r
+  if [[ $REPLY =~ ^[Yy]$ ]]; then
+    read -rp "Enter Your Username: [ $current_user_name ] " user_name_response
+    if [ ! -z "$user_name_response" ]; then
+      user_name=$user_name_response
+    fi
+
+    if [ "$current_user_name" != "$user_name" ]; then
+      updateUsernameForHost "$user_name" "$host_name"
+    fi
   fi
-  echo ""
-
-  if [ "$current_user_name" != "$user_name" ]; then
-    echo "This will create a hashedPassword for the new user in the options file."
-    while true; do
-      echo
-      read -rp "Enter New User Password: " new_pass
-      echo
-      read -rp "Enter New User Password Again: " new_pass2
-      if [ "$new_pass" == "$new_pass2" ]; then
-        echo "Passwords Match. Setting password."
-        user_password=$(mkpasswd -m sha-512 "$new_pass")
-        escaped_user_password=$(echo "$user_password" | sed 's/\//\\\//g')
-        sed -i "/^\s*hashedPassword[[:space:]]*=[[:space:]]*\"/s#\"\(.*\)\"#\"$escaped_user_password\"#" ./modules/core/user.nix
-        break
-      fi
-    done
-
-    sed -i "/^\s*username[[:space:]]*=[[:space:]]*\"/s/\"\(.*\)\"/\"$user_name\"/" ./hosts/"$host_name"/variables.nix
-    sed -i "/^\s*hostname[[:space:]]*=[[:space:]]*\"/s/\"\(.*\)\"/\"$host_name\"/" ./hosts/"$host_name"/variables.nix
-
-  fi
-
-else
-  # express install stuff here
-  echo "-----"
-  echo "Doing express install"
-
 fi
 
 ###############################################################################
-# echo "-----"
-# echo "Symlinking dot (.config and .local) files using GNU Stow"
-# [ ! -d ~/.config ] && mkdir -p $XDG_CONFIG_HOME
-# [ ! -d ~/.local/bin ] && mkdir -p ~/.local/bin
-# [ ! -d ~/.local/share ] && mkdir -p ~/.local/share
-#
-# cd $PROJECT_DIR/dots && stow -R config -t ~/.config/ -v
-# cd $PROJECT_DIR/dots && stow -R local -t ~/.local/ -v
-# cd $PROJECT_DIR || exit
-
-fc-cache -rf
-
-###############################################################################
-echo "Now Going To Build $PROJECT_NAME, 🤞"
+printHeader "Building $PROJECT_NAME..., 🤞"
 
 if [ "$user_name" != "$current_user_name" ]; then
   echo "Ensuring $PROJECT_NAME repository is in your users HOME directory."
@@ -179,9 +141,8 @@ if [ "$user_name" != "$current_user_name" ]; then
   cp -r $REPO_NAME /home/"$user_name"/
   sudo chown -R "$user_name":users /home/"$user_name"/$REPO_NAME
 fi
-sed -i "/^\s*host[[:space:]]*=[[:space:]]*\"/s/\"\(.*\)\"/\"$host_name\"/" ./flake.nix
 
-echo "using the following host name: $host_name"
+echo "Using the following host name: $host_name"
 if sudo nixos-rebuild switch --flake .#"$host_name" --show-trace; then
   echo "-----"
   echo "$PROJECT_NAME Has Been Installed!"
@@ -189,6 +150,9 @@ fi
 
 ###############################################################################
 echo "-----"
-echo "Cleaning up..."
-git restore ./flake.nix
 echo "Done!"
+if [ "$use_new_host" == true ]; then
+  echo ""
+  echo "Please configure the rest of your new host in the ./hosts/$host_name/variables.nix file!"
+  echo ""
+fi

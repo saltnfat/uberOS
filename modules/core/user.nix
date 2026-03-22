@@ -42,8 +42,6 @@ in
   };
   users.mutableUsers = true;
   users.users."${username}" = {
-    # You can get this by running - mkpasswd -m sha-512 <password>
-    hashedPassword = "$6$edpk.us5k8TGExLh$f3Q6AhZtLGXcOOOmnyUE7CSOMAmB0219Vgw1gbQkXE49M53XRYP7eRbiH9p84nsYjwBHsmrJVUB0Tm1YeS4AS.";
     isNormalUser = true;
     description = "${gitUsername}";
     extraGroups = [

@@ -11,6 +11,7 @@
     ./boot.nix
     ./dev-mode.nix
     ./fonts.nix
+    ./gaming.nix
     ./hwclock.nix
     ./kde.nix
     ./lact.nix
