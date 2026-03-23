@@ -40,7 +40,6 @@ in
     ./scripts
     ./sops.nix
     ./starship.nix
-    ./stylix.nix
     ./swaync.nix
     ./syncthing.nix
     ./tealdeer.nix

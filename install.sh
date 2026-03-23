@@ -80,9 +80,8 @@ echo "-----"
 ###############################################################################
 # If creating a new host
 
-printHeader "Creating a New Host"
-
 if [ "$use_new_host" == true ]; then
+  printHeader "Creating a New Host"
 
   read -rp "Enter Your Username: [ $current_user_name ] " user_name_response
   if [ ! -z "$user_name_response" ]; then
