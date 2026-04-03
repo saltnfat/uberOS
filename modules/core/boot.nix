@@ -30,7 +30,7 @@ in
 {
 
   # select which linux kernel to use
-  boot.kernelPackages = if isx86_64 then pkgs.linuxPackages_zen else pkgs.linuxPackages;
+  boot.kernelPackages = if isx86_64 then pkgs.linuxPackages_latest else pkgs.linuxPackages;
 
   # Bootloader
   boot.loader.systemd-boot = lib.mkMerge [

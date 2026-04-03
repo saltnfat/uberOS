@@ -96,7 +96,7 @@ _: {
     # Kitty, ghostty, wezterm, aalacrity
     # Note: kitty, wezterm, alacritty have to be enabled in `variables.nix`
     # Setting it here does not enable it. Kitty is installed by default
-    terminal = "alacritty"; # Set Default System Terminal
+    terminal = "kitty"; # Set Default System Terminal
 
     # Examples:
     # extraMonitorSettings = "monitor = Virtual-1,1920x1080@60,auto,1";

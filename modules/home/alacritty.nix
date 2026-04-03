@@ -7,7 +7,7 @@
 }:
 
 let
-  palette = config.colorScheme.palette;
+  #palette = config.colorScheme.palette;
   inherit (uberOS) alacrittyEnable x11ScaleFactor;
 in
 {

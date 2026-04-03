@@ -27,7 +27,6 @@
         extensions.packages = with inputs.firefox-addons.packages.${pkgs.stdenv.hostPlatform.system}; [
           ublock-origin
           #vimium
-          sidebery
           tabliss
           tab-session-manager
           react-devtools
@@ -76,7 +75,8 @@
             "google".metaData.alias = "@g"; # builtin engines only support specifying one additional alias
           };
         };
-        userChrome = builtins.readFile ./files/userChrome.css;
+        # should be unnecessary now with new firefox redesign
+        #userChrome = builtins.readFile ./files/userChrome.css;
       };
     };
   };

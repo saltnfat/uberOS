@@ -26,8 +26,8 @@ in
     ./fzf.nix
     ./git.nix
     ./gtk.nix
-    ./htop.nix
     ./hyprland
+    ./kitty.nix
     ./mangohud.nix
     ./mpd.nix
     ./neovim.nix
