@@ -27,7 +27,9 @@ in
   # Styling Options
   stylix = {
     enable = true;
+    # schemes here https://tinted-theming.github.io/tinted-gallery/
     base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
+    #base16Scheme = "${pkgs.base16-schemes}/share/themes/atelier-dune-light.yaml";
     image = stylixImage;
     polarity = "dark";
     opacity.terminal = 1.0;

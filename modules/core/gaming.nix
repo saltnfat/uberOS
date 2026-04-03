@@ -78,6 +78,12 @@
           USEMANGOHUD = "1";
           OBS_VKCAPTURE = "1";
           RADV_TEX_ANISO = "16";
+          GAMEMODERUN = "1";
+          PROTON_ENABLE_WAYLAND = "1";
+          PROTON_ENABLE_HDR = "1";
+          PROTON_DLSS_UPGRADE = "1";
+          DXVK_HDR = "1";
+          ENABLE_HDR_WSI = "1";
         };
       };
 

@@ -18,3 +18,4 @@ opt.showmode = false
 -- opt.guifont = "JetBrainsMono\\ NFM,Noto_Color_Emoji:h14"
 -- vim.opt.termguicolors = true
 vim.cmd.colorscheme("catppuccin")
+-- vim.cmd("packadd nvim.undotree")
