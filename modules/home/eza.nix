@@ -12,7 +12,7 @@
       "--group-directories-first"
       "--no-quotes"
       "--header" # Show header row
-      "--git-ignore"
+      "--git"
       "--icons=always"
       # "--time-style=long-iso" # ISO 8601 extended format for time
       "--classify" # append indicator (/, *, =, @, |)
@@ -21,14 +21,9 @@
   };
   # Aliases to make `ls`, `ll`, `la` use eza
   home.shellAliases = {
-    ls = "eza";
-    lt = "eza --tree --level=2";
-    ll = "eza  -lh --no-user --long";
-    la = "eza -lah ";
-    tree = "eza --tree ";
-    # ls = "eza -a --icons --git --group-directories-first";
-    # ll = "eza -lg --icons --git --group-directories-first";
-    # la = "eza -lag --icons --git --group-directories-first";
-    # lt = "eza -lag --icons --git --tree --level=2 --group-directories-first";
+    ls = "eza -a";
+    ll = "eza -lg ";
+    la = "eza -lag";
+    lt = "eza -lag --tree --level=2";
   };
 }

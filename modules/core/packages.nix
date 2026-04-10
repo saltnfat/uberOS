@@ -73,7 +73,7 @@
     sysfsutils # set of utilites built upon sysfs that exposes a system's device tree
     lact # gpu config tool (like msi afterburner)
     dnsmasq # for libvirt networking
-    qemu_full
+    qemu
     sops
     ncdu # disk usage analyzer tui
     kdiskmark

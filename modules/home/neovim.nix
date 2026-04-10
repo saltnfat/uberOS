@@ -9,6 +9,8 @@
       vimAlias = true;
       vimdiffAlias = true;
       withNodeJs = true;
+      withPython3 = false;
+      withRuby = false;
       extraPackages = with pkgs; [
         # LSPs
         bash-language-server

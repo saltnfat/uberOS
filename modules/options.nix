@@ -137,12 +137,6 @@ in
       default = true;
       description = "Enable OBS Studio.";
     };
-    # Python development tools
-    pythonEnable = mkOption {
-      type = types.bool;
-      default = true;
-      description = "Enable Python development tools.";
-    };
 
     # Hyprland Settings
     # You can configure multiple monitors.

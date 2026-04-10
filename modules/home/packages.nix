@@ -92,7 +92,7 @@ in
       nix-sweep # clean up nix profile generations and left over gc roots
       qtox
       qbittorrent
-      tribler
+      #tribler # another torrent client
       clamtk
       element-desktop
       cryfs

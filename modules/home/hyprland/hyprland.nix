@@ -45,7 +45,7 @@ let
 in
 {
   home.packages = with pkgs; [
-    swww
+    awww
     grim
     slurp
     wl-clipboard
