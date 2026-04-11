@@ -28,6 +28,12 @@
         nixfmt
         stylelint
         stylua
+        prettier
+
+        # for snacks.image
+        ghostscript # pdf
+        tectonic # tex/latex engine
+        mermaid-cli
       ];
       plugins = with pkgs.vimPlugins; [
         # automated session management
@@ -84,7 +90,6 @@
         # dep for barbecue-nvim
         nvim-navic
         # dep for noice-nvim
-        nvim-notify
         nvim-treesitter.withAllGrammars
         # Use treesitter to autoclose and autorename html tag
         nvim-ts-autotag
@@ -100,8 +105,6 @@
         render-markdown-nvim
         # misc QoL plugins like image support
         snacks-nvim
-        # Additional tooling and integration of tailwindcss lsp and neovim
-        tailwind-tools-nvim
         telescope-fzf-native-nvim
         # extendable fuzzy finder over lists
         telescope-nvim

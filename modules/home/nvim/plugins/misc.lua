@@ -115,8 +115,8 @@ require("snacks").setup({
 	},
 	scroll = { enabled = true },
 	zen = { enabled = true },
+	notifier = { enabled = true },
 })
-require("tailwind-tools").setup({})
 require("trouble").setup({
 	win = {
 		wo = {
