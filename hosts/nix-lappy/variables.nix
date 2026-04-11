@@ -96,7 +96,7 @@ _: {
     # Kitty, ghostty, wezterm, aalacrity
     # Note: kitty, wezterm, alacritty have to be enabled in `variables.nix`
     # Setting it here does not enable it. Kitty is installed by default
-    terminal = "alacritty"; # Set Default System Terminal
+    terminal = "kitty"; # Set Default System Terminal
 
     # Examples:
     # extraMonitorSettings = "monitor = Virtual-1,1920x1080@60,auto,1";
@@ -106,7 +106,7 @@ _: {
     #monitor = DP-3, 3440x1440@174.96, auto, 1, bitdepth, 10, cm, hdr, sdrbrightness, 1.15, sdrsaturation, 0.80, vrr, 3
     #monitor = DP-3, 3440x1440@174.96, auto, 1, bitdepth, 10, vrr, 3
     extraMonitorSettings = "
-    monitor = DP-3, 3440x1440@174.96, auto, 1, bitdepth, 10, cm, hdr, sdrbrightness, 1.15, sdrsaturation, 0.80, vrr, 3
+    monitor = eDP-2, 2880x1800@120.00100, 0x0, 1.6, bitdepth, 10, cm, hdr, sdrbrightness, 1.15, sdrsaturation, 0.80, vrr, 3
 
     ";
 

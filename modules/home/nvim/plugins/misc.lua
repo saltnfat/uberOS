@@ -112,6 +112,7 @@ require("snacks").setup({
 			inline = true,
 			float = true,
 		},
+		math = { enabled = false },
 	},
 	scroll = { enabled = true },
 	zen = { enabled = true },

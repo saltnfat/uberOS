@@ -24,13 +24,13 @@
           "privacy.donottrackheader.enabled" = true;
           "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
         };
-        extensions.packages = with inputs.firefox-addons.packages.${pkgs.stdenv.hostPlatform.system}; [
-          ublock-origin
-          #vimium
-          tabliss
-          tab-session-manager
-          react-devtools
-        ];
+        # extensions.packages = with inputs.firefox-addons.packages.${pkgs.stdenv.hostPlatform.system}; [
+        #   ublock-origin
+        #   #vimium
+        #   tabliss
+        #   tab-session-manager
+        #   react-devtools
+        # ];
         search = {
           force = true;
           default = "ddg";
