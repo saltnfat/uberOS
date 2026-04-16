@@ -11,7 +11,15 @@ in
 {
   networking = {
     hostName = "${hostname}"; # Define your hostname
-    networkmanager.enable = true;
+    networkmanager = {
+      enable = true;
+    };
+    wireless = {
+      scanOnLowSignal = false;
+      extraConfig = ''
+        DisablePeriodicScan=true
+      '';
+    };
     hosts = {
       "192.168.8.165" = [ "nix-lappy" ];
       "192.168.8.179" = [ "nix-deskstar" ];

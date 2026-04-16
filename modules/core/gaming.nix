@@ -80,10 +80,12 @@
           RADV_TEX_ANISO = "16";
           GAMEMODERUN = "1";
           PROTON_ENABLE_WAYLAND = "1";
-          PROTON_ENABLE_HDR = "1";
           PROTON_DLSS_UPGRADE = "1";
+          PROTON_ENABLE_HDR = "1";
           DXVK_HDR = "1";
           ENABLE_HDR_WSI = "1";
+          LD_PRELOAD = ""; # Fix stuttering caused by Steam game recorder feature
+          __GL_SHADER_DISK_CACHE_SKIP_CLEANUP = "1"; # let shader cache go past limit (for nvidia)
         };
       };
 

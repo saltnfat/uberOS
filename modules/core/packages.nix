@@ -101,6 +101,7 @@
     nvtopPackages.full # gpu monitoring
     wireshark # packet monitoring
     clamav # antivirus
+    sniffnet # user friendly network monitoring
 
   ];
 }

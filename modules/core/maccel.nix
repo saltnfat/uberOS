@@ -32,9 +32,9 @@ in
       # mode = "synchronous";
 
       # Linear mode
-      acceleration = 0.01;
-      offset = 0.10;
-      outputCap = 10.0;
+      acceleration = 0.02;
+      offset = 0.2;
+      outputCap = 8.0;
 
       # # Natural mode
       # decayRate = 0.1;
