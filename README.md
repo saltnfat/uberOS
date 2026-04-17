@@ -41,20 +41,23 @@ Neovim is automatically set up with the installer.  The plugin selection and con
 ### 💾 Installation:
 The installer only works for **NixOS** Linux
 
-<b>Open a terminal in HOME</b>
-- **Clone this repo**
+<b>Open a terminal (should be in HOME directory)</b>
+1) **Install Git**
+```sh
+nix-shell -p git
+```
+
+2) **Clone this repo**
 ```sh
 git clone https://github.com/saltnfat/uberOS.git
 ```
-- **cd into repo**
+
+3) **cd into repo**
 ```sh
 cd uberOS
 ```
-- **Give install script execute permissions**
-```sh
-chmod +x install.sh
-```
-- **Run the installer**
+
+4. **Run the installer**
 ```sh
 ./install.sh
 ```
