@@ -26,6 +26,12 @@ in
             on-timeout = "hyprctl dispatch dpms off";
             on-resume = "hyprctl dispatch dpms on";
           }
+          {
+            timeout = 3600; # 1 hour
+            on-timeout = "systemctl suspend";
+            # script to fix washed out colors - use until hyprland fixes this issue
+            on-resume = "exec reset-hyprland-monitor";
+          }
         ];
       };
     };
