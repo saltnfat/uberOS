@@ -145,8 +145,7 @@ createNewHost() {
   updateHostsInFlake "$host_name"
   gpuProfileDetection "$host_name"
 
-  #sed -i "/^\s*gpuProfile[[:space:]]*=[[:space:]]*\"/s/\"\(.*\)\"/\"$gpu_profile\"/" ./hosts/"$host_name"/variables.nix
-  #git add ./hosts/"$host_name"/
+  git add ./hosts/"$host_name"/
 }
 
 generateHardwareConfig() {

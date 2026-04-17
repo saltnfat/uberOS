@@ -16,7 +16,7 @@ in
     settings = {
       general = {
         disable_loading_bar = true;
-        grace = 10;
+        grace = 300; # sec before requiring auth
         hide_cursor = true;
         no_fade_in = false;
       };
