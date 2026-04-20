@@ -15,6 +15,9 @@
         isDefault = true;
         settings = {
           "apz.doubletapzoom.defaultzoomin" = "1.2";
+          "sidebar.animation.duration-ms" = "100";
+          "sidebar.animation.expand-on-hover.delay-duration-ms" = "200";
+          "sidebar.animation.expand-on-hover.duration-ms" = "100";
           "browser.search.defaultenginename" = "DuckDuckGo";
           "browser.search.order.1" = "Searx";
           "browser.toolbars.bookmarks.visibility" = "always";
@@ -24,13 +27,13 @@
           "privacy.donottrackheader.enabled" = true;
           "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
         };
-        # extensions.packages = with inputs.firefox-addons.packages.${pkgs.stdenv.hostPlatform.system}; [
-        #   ublock-origin
-        #   #vimium
-        #   tabliss
-        #   tab-session-manager
-        #   react-devtools
-        # ];
+        extensions.packages = with inputs.firefox-addons.packages.${pkgs.stdenv.hostPlatform.system}; [
+          ublock-origin
+          #vimium
+          tabliss
+          tab-session-manager
+          react-devtools
+        ];
         search = {
           force = true;
           default = "ddg";

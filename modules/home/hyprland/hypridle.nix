@@ -5,6 +5,7 @@ let
     ;
   lockTimeout = if oled == true then 120 else 350;
   screenTimeout = if oled == true then -1 else 1200; # 1200 is 20 min
+  gracePeriod = "300";
 in
 {
   services = {
@@ -14,12 +15,12 @@ in
         general = {
           after_sleep_cmd = "hyprctl dispatch dpms on";
           ignore_dbus_inhibit = false;
-          lock_cmd = "hyprlock";
+          lock_cmd = "hyprlock --grace ${gracePeriod}"; # grace must be passed as arg, doesnt work in config lol
         };
         listener = [
           {
             timeout = lockTimeout;
-            on-timeout = "hyprlock";
+            on-timeout = "hyprlock --grace ${gracePeriod}";
           }
           {
             timeout = screenTimeout;

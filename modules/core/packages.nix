@@ -34,11 +34,8 @@
   # List System Programs
   environment.systemPackages = with pkgs; [
 
-    wget
     curl
     gitFull
-    unzip
-    unrar
     virt-viewer
     ripgrep
     fastfetch
@@ -48,7 +45,6 @@
     kdePackages.partitionmanager
     sbctl # secure boot
     cmatrix # Matrix movie effect in terminal
-    duf # disk usage util
     gpu-screen-recorder # noctalia-shell dep
     libnotify
     lm_sensors
@@ -102,6 +98,11 @@
     wireshark # packet monitoring
     clamav # antivirus
     sniffnet # user friendly network monitoring
+
+    # nix utils
+    comma
+    nix-index # dep for comma
+    nurl
 
   ];
 }
