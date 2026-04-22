@@ -110,6 +110,12 @@ _: {
 
     ";
 
+    # Power options
+    lockTimeout = 120;
+    screenTimeout = 300;
+    gracePeriod = "60";
+    suspendTimeout = 1800; # 30 min
+
     # Themes, waybar and animation.
     # Only uncomment your selection - The others much be commented out.
 

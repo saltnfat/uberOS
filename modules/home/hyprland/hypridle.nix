@@ -2,10 +2,11 @@
 let
   inherit (uberOS)
     oled
+    lockTimeout
+    screenTimeout
+    gracePeriod
+    suspendTimeout
     ;
-  lockTimeout = if oled == true then 120 else 350;
-  screenTimeout = if oled == true then -1 else 1200; # 1200 is 20 min
-  gracePeriod = "300";
 in
 {
   services = {
@@ -28,7 +29,7 @@ in
             on-resume = "hyprctl dispatch dpms on";
           }
           {
-            timeout = 3600; # 1 hour
+            timeout = suspendTimeout;
             on-timeout = "systemctl suspend";
             # script to fix washed out colors - use until hyprland fixes this issue
             on-resume = "exec reset-hyprland-monitor";

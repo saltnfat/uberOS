@@ -335,5 +335,31 @@ in
         Applied to xdg.mimeApps.defaultApplications for the user on this host.
       '';
     };
+
+    # Power management settings
+
+    gracePeriod = mkOption {
+      type = types.str;
+      default = "180";
+      description = "The period of time to wait until the screen is actually locked";
+    };
+
+    lockTimeout = mkOption {
+      type = types.int;
+      default = 120;
+      description = "The period of time to wait until the screen is actually locked";
+    };
+
+    screenTimeout = mkOption {
+      type = types.int;
+      default = 300;
+      description = "The period of time to wait until the screen is turned off";
+    };
+
+    suspendTimeout = mkOption {
+      type = types.int;
+      default = 3600; # 1 hr
+      description = "The period of time to wait until the system suspends (sleeps)";
+    };
   };
 }

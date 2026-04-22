@@ -6,9 +6,6 @@
 }:
 let
   inherit (uberOS) oled;
-
-  lockTimeout = if oled == true then 120 else 350;
-  screenTimeout = if oled == true then 0 else 1200; # 1200 is 20 min
 in
 {
   programs.hyprlock = {
