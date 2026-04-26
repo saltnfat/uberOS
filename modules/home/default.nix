@@ -28,6 +28,7 @@ in
     ./gtk.nix
     ./hyprland
     ./kitty.nix
+    ./librewolf.nix
     ./mangohud.nix
     ./mpd.nix
     ./neovim.nix
